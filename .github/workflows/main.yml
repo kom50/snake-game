@@ -34,18 +34,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+      - run: |
+          git config --global user.email ${{ secrets.EMAIL }}
+          git config --global user.name ${{ secrets.USER }}
 
       - name: Build and deploy
-        env:
-          USER: ${{ secrets.USER }}
-          EMAIL: ${{ secrets.EMAIL }}
-          
-      - name: Show
-        run: |
-          echo $USER
-
-      - run: |
-          git config --global user.email $EMAIL
-          git config --global user.name $USER
         run:  sh ./deploy.sh 
         shell: bash
