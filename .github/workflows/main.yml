@@ -36,5 +36,11 @@ jobs:
           echo test, and deploy your project.
 
       - name: Build and deploy
+        env:
+          USER: ${{ secrets.USER }}
+          EMAIL: ${{ secrets.EMAIL }}
+      - run: |
+          git config --global user.email $EMAIL
+          git config --global user.name $USER
         run:  sh ./deploy.sh 
         shell: bash
