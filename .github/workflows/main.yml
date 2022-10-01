@@ -39,6 +39,11 @@ jobs:
         env:
           USER: ${{ secrets.USER }}
           EMAIL: ${{ secrets.EMAIL }}
+          
+      - name: Show
+        run: |
+          echo $USER
+
       - run: |
           git config --global user.email $EMAIL
           git config --global user.name $USER
