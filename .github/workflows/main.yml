@@ -36,5 +36,5 @@ jobs:
           echo test, and deploy your project.
 
       - name: Build and deploy
-        run:  sh chmod +x deploy.sh 
+        run:  chmod +x sh deploy.sh 
         shell: bash
