@@ -6,5 +6,6 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     host: true
-  }
+  },
+  base: process.env.NODE_ENV === 'production' ? '/snake-game/' : "/",
 })
