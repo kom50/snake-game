@@ -36,5 +36,4 @@ jobs:
           echo test, and deploy your project.
 
       - name: Build and deploy
-        run: deploy.sh
-        
+        run: ${pwd}/deploy.sh
