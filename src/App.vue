@@ -4,7 +4,7 @@ import HomeView from './components/HomeView.vue'
 
 <template>
   <div>
-    Hii
+    Create a snake game using vueUse
   </div>
   <HomeView />
 </template>
