@@ -19,6 +19,6 @@ git checkout -b main
 git add -A
 git commit -m 'deploy' 
 
-git push -f https://github.com/kom50/snake-game.git main:gh-pages
+git push -f origin main:gh-pages
 
 cd -
