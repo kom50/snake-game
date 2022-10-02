@@ -15,7 +15,7 @@ jobs:
         run: |
           yarn install
           rm -rf dist
-          yarn dist
+          yarn build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
