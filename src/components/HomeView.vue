@@ -115,7 +115,7 @@ function generateFood() {
   printFood()
 }
 
-function full() {
+function fullscreen() {
   container.value?.requestFullscreen()
 }
 
@@ -145,7 +145,7 @@ function run(directionValue: SwipeDirection) {
 }
 
 onMounted(() => {
-  window.addEventListener('click', full)
+  window.addEventListener('click', fullscreen)
   if (target.value)
     snakeBody.value = target.value.getElementsByClassName('rect');
 
