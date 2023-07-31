@@ -1,8 +1,8 @@
 <template>
   <div ref="container" class="h-full w-full select-none">
-    <svg ref="target" class="h-full w-full bg-green-600 border-8 border-indigo-500">
-      <text y='20' x='10'>Status : {{status}}</text>
-      <text y='20' :x='width - 100'> Score : {{score}}</text>
+    <svg ref="target" class="h-full w-full bg-green-600 border-[10px] border-gray-500">
+      <text y='20' x='10'>Status : {{ status }}</text>
+      <text y='20' :x='width - 100'> Score : {{ score }}</text>
       <rect class='rect' width='10' height='10' x='60' y='130' style='fill: red; stroke-width:2px; '></rect>
       <rect class='rect' width='10' height='10' x='50' y='130' style='fill: blue; stroke-width:2px; '></rect>
       <rect class='rect' width='10' height='10' x='40' y='130' style='fill: blue; stroke-width:2px; '></rect>
@@ -35,12 +35,9 @@ const snakeBody = ref<HTMLCollectionOf<Element> | null>(null);
 
 const previousDirection = ref('LEFT' as SwipeDirection)
 const timer = ref(0)
-const speed = ref(50)
 
 // Window height and width 
 const { width, height } = useWindowSize()
-
-const handler = () => clearInterval(timer.value)
 
 const { direction } = useSwipe(
   target, {
@@ -67,6 +64,7 @@ const { direction } = useSwipe(
 function generateSnakePosition() {
   snakeX.value.pop();
   snakeX.value.unshift(x.value);
+
   snakeY.value.pop();
   snakeY.value.unshift(y.value);
 }
@@ -97,15 +95,10 @@ function addSnakeBody() {
 
 function eatFood() {
   if (foodX.value === x.value && foodY.value === y.value) {
-    console.log('Snake eaten food.');
     score.value++;
     generateFood();
     addSnakeBody();
   }
-}
-
-function Rand() {
-  return Math.floor(Math.random() * width.value + 2);
 }
 
 function printFood() {
@@ -116,17 +109,9 @@ function printFood() {
 }
 
 function generateFood() {
-  do {
-    foodX.value = Rand();
-    if (foodX.value > 10 && foodX.value < width.value - 2 && foodX.value !== x.value && foodX.value % 10 == 0)
-      break;
-  } while (true);
-  do {
-    foodY.value = Rand();
-    if (foodY.value > 10 && foodY.value < height.value - 2 && foodY.value !== y.value && foodY.value % 10 == 0)
-      break;
-  }
-  while (true);
+  foodX.value = Math.floor(Math.random() * (width.value - 10) / 10) * 10;
+  foodY.value = Math.floor(Math.random() * (height.value - 10) / 10) * 10;
+
   printFood()
 }
 
@@ -135,7 +120,8 @@ function full() {
 }
 
 function run(directionValue: SwipeDirection) {
-  timer.value = setInterval(() => {
+
+  timer.value = setInterval(function start() {
     switch (directionValue) {
       case 'RIGHT':
         x.value += 10
@@ -152,7 +138,9 @@ function run(directionValue: SwipeDirection) {
     }
     printSnake()
     eatFood()
-  }, speed.value);
+
+    return start;
+  }(), 75);
 
 }
 
